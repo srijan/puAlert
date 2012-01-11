@@ -1,3 +1,4 @@
+#!/bin/bash
 var="Preactice Tests and CL Schedule"
 while [ 1=1 ]
 do
@@ -5,7 +6,7 @@ do
 out="`./execPuTest.sh \"$var\"|head -n 1`"
 var="$out"
 echo $var
-sleep 60
+sleep 300
 done
 
 
