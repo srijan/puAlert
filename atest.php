@@ -1,10 +1,10 @@
 <?php
-$phone_receivers = array("8130824397","7737076417","9772975073","9602214007","9660004052","9828672255");
+$phone_receivers = array("8130824397","7737076417","9772975073","9602214007","9660004052","9828672255","8123764690");
 
 $uid = '8130824397';
 $pwd = '35690';
 $provider = 'fullonsms';
-$msg = "Thank you for subscribing to puAlerts on your phone. Rs 100 have been deducted from your mess bill.";
+$msg = "This service is still in beta. Please excuse unwanted messages.";
 
 foreach($phone_receivers as $pr ) {
   $phone = $pr;

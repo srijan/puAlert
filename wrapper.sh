@@ -1,5 +1,5 @@
 #!/bin/bash
-var="CL Test Schedule"
+var="Synopsys Rescheduled"
 while [ 1=1 ]
 do
 #echo $var

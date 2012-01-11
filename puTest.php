@@ -1,9 +1,10 @@
 <?php
 require_once "Mail.php";
 
+error_reporting(E_ERROR);
+
 $mail_receivers = array("<deepak28290@gmail.com>","<srijan4@gmail.com>"/*",<gauravkumar552@gmail.com>","<jagan387@gmail.com>","<ntsh.jain@gmail.com>"*/);
 $phone_receivers = array("8130824397","7737076417","9772975073","9602214007","9660004052","9828672255","8123764690");
-
 
 $from = "<PU_Alerts>";
 $subject = "New Notices on Placement Unit site ";
@@ -25,8 +26,13 @@ if (PEAR::isError($smtp)) {
 }
  */
 $html=file_get_contents('http://pu/notices_open.php');
-$dom = new domDocument; 
-$dom->loadHTML($html); 
+if($html==false) {
+  echo $argv[1];
+  return;
+}
+//echo $html;
+$dom = new domDocument;
+$dom->loadHTML($html);
 $dom->preserveWhiteSpace = false; 
 $ul = $dom->getElementsByTagName('ul'); 
 $i=0;
