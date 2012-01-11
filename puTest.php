@@ -3,7 +3,6 @@ require_once "Mail.php";
 
 error_reporting(E_ERROR);
 
-$mail_receivers = array("<deepak28290@gmail.com>","<srijan4@gmail.com>"/*",<gauravkumar552@gmail.com>","<jagan387@gmail.com>","<ntsh.jain@gmail.com>"*/);
 $phone_receivers = array("8130824397","7737076417","9772975073","9602214007","9660004052","9828672255","8123764690");
 
 $from = "<PU_Alerts>";
@@ -11,20 +10,7 @@ $subject = "New Notices on Placement Unit site ";
 $body = "Hi,\nThere are new unread notices to be viewed on PU!\n\n";
 $host = "mailserver.bits-pilani.ac.in";
 $port = "25";
-$username = "f2008093";
-$password = "deepak28290";
 
-/*$smtp = Mail::factory('smtp',
-  array ('host' => $host,
-  'port' => $port,
-  'auth' => true,
-  'username' => $username,
-  'password' => $password));
-
-if (PEAR::isError($smtp)) {
-  echo("<p>" . $smtp->getMessage() . "</p>");
-}
- */
 $html=file_get_contents('http://pu/notices_open.php');
 if($html==false) {
   echo $argv[1];
