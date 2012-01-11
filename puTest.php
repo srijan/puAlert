@@ -1,8 +1,11 @@
 <?php
 require_once "Mail.php";
 
+$mail_receivers = array("<deepak28290@gmail.com>","<gauravkumar552@gmail.com>","<srijan4@gmail.com>","<jagan387@gmail.com>","<ntsh.jain@gmail.com>");
+$phone_receivers = array("8130824397","7737076417");
+
+
 $from = "<PU_Alerts>";
-$to = "<deepak28290@gmail.com>";$to1="<gauravkumar552@gmail.com>"; $to2="<srijan4@gmail.com>";$to3="<jagan387@gmail.com>";$to4="<>";
 $subject = "New Notices on Placement Unit site ";
 $body = "Hi,\nThere are new unread notices to be viewed on PU!\n\n";
 $host = "mailserver.bits-pilani.ac.in";
@@ -10,9 +13,6 @@ $port = "25";
 $username = "f2008093";
 $password = "deepak28290";
 
-$headers = array ('From' => $from,
-  'To' => $to,
-  'Subject' => $subject);
 $smtp = Mail::factory('smtp',
   array ('host' => $host,
   'port' => $port,
@@ -29,34 +29,52 @@ $ul = $dom->getElementsByTagName('ul');
 $i=0;
 $j=0;
 $temp=$argv[1];
-$notices="Showing the notices onDear All,
-  ly uploaded after ".$temp."\n\n";
+$notices="Showing the notices only uploaded after ".$temp."\n\n";
+$sms = "New notices:\n";
 while($i<19){
   if(!strcmp($temp,$ul->item(1)->getElementsByTagName('li')->item($i)->nodeValue)){
-    break;	
+    break;
   }
   $j=$j+1;
   $notices=$notices.$j.". ".$ul->item(1)->getElementsByTagName('li')->item($i)->nodeValue."\n";
+  $sms=$sms.$j.". ".$ul->item(1)->getElementsByTagName('li')->item($i)->nodeValue."\n";
 
 
-  $i=$i+1;	
+  $i=$i+1;
 
 }
 if($j!=0){
   $body=$body.$notices."\nTo view them please visit http://pu/notices_open.php\nThanks for subscribing! Have a wonderful day!\n";
   //echo $body;
 
-  $mail = $smtp->send($to, $headers, $body);
-  $mail = $smtp->send($to1, $headers, $body);
-  $mail = $smtp->send($to2, $headers, $body);
-  $mail = $smtp->send($to3, $headers, $body);
-  /*$mail = $smtp->send($to4, $headers, $body);*/
-  if (PEAR::isError($mail)) {
-    //echo("" . $mail->getMessage() . "");
-  } else {
-    //          echo("Message successfully sent!");
+  // mail sending..
+  foreach($mail_receivers as $mr ) {
+    $headers = array ('From' => $from, 'To' => $mr, 'Subject' => $subject);
+    $mail = $smtp->send($mr, $headers, $body);
+    if (PEAR::isError($mail)) {
+    } else {
+    }
+  }
+  // sms sending
+
+  $uid = '8130824397';
+  $pwd = '35690';
+  $msg = $sms;
+  $provider = 'fullonsms';
+
+  for($phone_receivers as $pr ) {
+    $phone = $pr;
+    $content =  'uid='.rawurlencode($uid).
+      '&pwd='.rawurlencode($pwd).
+      '&phone='.rawurlencode($phone).
+      '&msg='.rawurlencode($msg).
+      //'&codes=1'.  // Use if you need a user freindly response message.
+      '&provider='.rawurlencode($provider);
+
+    $sms_response = file_get_contents('http://ubaid.tk/sms/sms.aspx?'.$content);
+    //echo $sms_response;
   }
 
-}       
+}
 echo $ul->item(1)->getElementsByTagName('li')->item(0)->nodeValue;
 ?>
