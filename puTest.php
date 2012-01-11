@@ -2,7 +2,7 @@
 require_once "Mail.php";
 
 $mail_receivers = array("<deepak28290@gmail.com>","<srijan4@gmail.com>"/*",<gauravkumar552@gmail.com>","<jagan387@gmail.com>","<ntsh.jain@gmail.com>"*/);
-$phone_receivers = array("8130824397","7737076417","9772975073","9602214007","9660004052","9828672255");
+$phone_receivers = array("8130824397","7737076417","9772975073","9602214007","9660004052","9828672255","8123764690");
 
 
 $from = "<PU_Alerts>";
@@ -61,7 +61,7 @@ if($j!=0){
   // sms sending
   $uid = '8130824397';
   $pwd = '35690';
-  $msg = $sms+"\n Go to PU site for details.";
+  $msg = $sms."\n Go to PU site for details.";
   $provider = 'fullonsms';
 
   foreach($phone_receivers as $pr ) {
