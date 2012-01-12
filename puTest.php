@@ -1,15 +1,15 @@
 <?php
+error_reporting(E_ERROR);
 require_once "Mail.php";
 
-error_reporting(E_ERROR);
-
-$phone_receivers = array("8130824397","7737076417","9772975073","9602214007","9660004052","9828672255","8123764690");
-
-$from = "<PU_Alerts>";
-$subject = "New Notices on Placement Unit site ";
-$body = "Hi,\nThere are new unread notices to be viewed on PU!\n\n";
-$host = "mailserver.bits-pilani.ac.in";
-$port = "25";
+/**
+ * Define the following constants in constants.php:
+ * $phone_receivers
+ * $uid = '8130824397'
+ * $pwd = '35690'
+ * $provider = 'fullonsms'
+ */
+require_once "constants.php"
 
 $html=file_get_contents('http://pu/notices_open.php');
 if($html==false) {
@@ -51,10 +51,7 @@ if($j!=0){
     }
   }*/
   // sms sending
-  $uid = '8130824397';
-  $pwd = '35690';
   $msg = $sms."\n Go to PU site for details.";
-  $provider = 'fullonsms';
 
   foreach($phone_receivers as $pr ) {
     $phone = $pr;
