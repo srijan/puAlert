@@ -11,7 +11,14 @@ require_once "Mail.php";
  */
 require_once "constants.php"
 
-$html=file_get_contents('http://pu/notices_open.php');
+$opts = array(
+  'http'=>array(
+    'header'=>"Cookie: open_notices_cookie=DUMMY;\r\n"
+  )
+);
+
+$context = stream_context_create($opts);     
+$html=file_get_contents('http://pu.bits-pilani.ac.in/notices_open.php',false,$context);
 if($html==false) {
   echo $argv[1];
   return;
