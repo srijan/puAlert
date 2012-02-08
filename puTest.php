@@ -5,8 +5,8 @@ require_once "Mail.php";
 /**
  * Define the following constants in constants.php:
  * $phone_receivers
- * $uid = '8130824397'
- * $pwd = '35690'
+ * $uid = '1136824597'    // Replace with your phone number
+ * $pwd = '35120'         // Replace with your password
  * $provider = 'fullonsms'
  */
 require_once "constants.php";
