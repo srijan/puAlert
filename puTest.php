@@ -9,7 +9,7 @@ require_once "Mail.php";
  * $pwd = '35690'
  * $provider = 'fullonsms'
  */
-require_once "constants.php"
+require_once "constants.php";
 
 $opts = array(
   'http'=>array(
