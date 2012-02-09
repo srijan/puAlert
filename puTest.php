@@ -45,7 +45,7 @@ while($i<19){
   $i=$i+1;
 
 }
-if($j!=0){
+if($j!=0 && $j!=19){
   $body=$body.$notices."\nTo view them please visit http://pu/notices_open.php\nThanks for subscribing! Have a wonderful day!\n";
   //echo $body;
 
@@ -73,6 +73,25 @@ if($j!=0){
     //echo $sms_response;
   }
 
+}
+if($j==19){
+  $sms=$sms."1. ".$ul->item(1)->getElementsByTagName('li')->item(0)->nodeValue."\n";
+   $msg = $sms."\n Go to PU site for details.";
+
+  foreach($phone_receivers as $pr ) {
+    $phone = $pr;
+    $content =  'uid='.rawurlencode($uid).
+      '&pwd='.rawurlencode($pwd).
+      '&phone='.rawurlencode($phone).
+      '&msg='.rawurlencode($msg).
+      //'&codes=1'.  // Use if you need a user freindly response message.
+      '&provider='.rawurlencode($provider);
+
+    $sms_response = file_get_contents('http://ubaid.tk/sms/sms.aspx?'.$content);
+    //echo $sms_response;
+  }
+
+  
 }
 echo $ul->item(1)->getElementsByTagName('li')->item(0)->nodeValue;
 ?>
