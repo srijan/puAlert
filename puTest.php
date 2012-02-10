@@ -39,7 +39,7 @@ while($i<19){
   }
   $j=$j+1;
   $notices=$notices.$j.". ".$ul->item(1)->getElementsByTagName('li')->item($i)->nodeValue."\n";
-  $sms=$sms.$j.". ".$ul->item(1)->getElementsByTagName('li')->item($i)->nodeValue."\n";
+  $sms=$sms.$j.". ".$ul->item(1)->getElementsByTagName('li')->item($i)->nodeValue.".";
 
 
   $i=$i+1;
@@ -58,7 +58,7 @@ if($j!=0 && $j!=19){
     }
   }*/
   // sms sending
-  $msg = $sms."\n Go to PU site for details.";
+  $msg = $sms." Go to PU site for details.";
 
   foreach($phone_receivers as $pr ) {
     $phone = $pr;
@@ -75,8 +75,8 @@ if($j!=0 && $j!=19){
 
 }
 if($j==19){
-  $sms=$sms."1. ".$ul->item(1)->getElementsByTagName('li')->item(0)->nodeValue."\n";
-   $msg = $sms."\n Go to PU site for details.";
+  $sms="1. ".$ul->item(1)->getElementsByTagName('li')->item(0)->nodeValue.".";
+  $msg = $sms." Go to PU site for details.";
 
   foreach($phone_receivers as $pr ) {
     $phone = $pr;
